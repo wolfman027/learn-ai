@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: alibaba-ai-cloud-demo
+  ai:
+    dashscope:
+      api-key: sk-0ee0d2e3da1f4071a7fd2c48f4043d52
+      chat:
+        options:
+          model: deepseek-r1
+      agent:
+        app-id: d770b8e9c1f5417bb9bcd88fdd8e49b8
