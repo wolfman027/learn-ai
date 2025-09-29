@@ -1,0 +1,58 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.4.10-SNAPSHOT'
+	id 'io.spring.dependency-management' version '1.1.7'
+}
+
+group = 'com.wolfman'
+version = '0.0.1-SNAPSHOT'
+description = 'Demo project for Spring Boot'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(17)
+	}
+}
+
+// 定义版本变量
+ext {
+	springBootVersion = '3.4.10-SNAPSHOT'
+	springAiVersion = '1.0.0-M6'
+	springAiAlibabaVersion = '1.0.0-M6.1'
+	lombokVersion = '1.18.30'
+	junitVersion = '1.10.1'
+}
+
+repositories {
+	mavenCentral()
+	maven { url = 'https://repo.spring.io/snapshot' }
+}
+
+// 依赖管理 - 相当于 Maven 的 dependencyManagement
+dependencyManagement {
+	imports {
+		mavenBom "org.springframework.boot:spring-boot-dependencies:${springBootVersion}"
+		mavenBom "org.springframework.ai:spring-ai-bom:${springAiVersion}"
+	}
+}
+
+dependencies {
+	// Spring Boot 相关依赖 - 明确指定版本
+	implementation "org.springframework.boot:spring-boot-starter-web:${springBootVersion}"
+	
+	// Spring AI 相关依赖 - 明确指定版本
+	implementation "org.springframework.ai:spring-ai-ollama-spring-boot-starter:${springAiVersion}"
+	
+	// 阿里云 AI 依赖
+//	implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter:${springAiAlibabaVersion}"
+	
+	// 其他依赖
+	implementation "org.projectlombok:lombok:${lombokVersion}"
+
+	testRuntimeOnly "org.junit.platform:junit-platform-launcher:${junitVersion}"
+	testImplementation "org.springframework.boot:spring-boot-starter-test:${springBootVersion}"
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}

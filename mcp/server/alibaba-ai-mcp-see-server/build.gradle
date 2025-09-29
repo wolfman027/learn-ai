@@ -1,0 +1,70 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.4.10'
+	id 'io.spring.dependency-management' version '1.1.7'
+}
+
+group = 'com.wolfman'
+version = '0.0.1-SNAPSHOT'
+description = 'Demo project for Spring Boot'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(17)
+	}
+}
+
+
+// 定义版本变量
+ext {
+	springAiAlibabaVersion = '1.0.0.3'
+	springAiVersion = '1.0.0-SNAPSHOT'  // 改为SNAPSHOT版本
+}
+
+repositories {
+	mavenCentral()
+	// 添加 Spring AI 快照仓库
+	maven {
+		url 'https://repo.spring.io/snapshot'
+		name 'Spring Snapshots'
+	}
+	maven {
+		url 'https://repo.spring.io/milestone'
+		name 'Spring Milestones'
+	}
+}
+
+repositories {
+	mavenCentral()
+	// 添加 Spring AI 快照仓库
+	maven {
+		url 'https://repo.spring.io/snapshot'
+		name 'Spring Snapshots'
+	}
+	maven {
+		url 'https://repo.spring.io/milestone'
+		name 'Spring Milestones'
+	}
+}
+
+// 依赖管理 - 相当于 Maven 的 dependencyManagement
+dependencyManagement {
+	imports {
+		mavenBom "com.alibaba.cloud.ai:spring-ai-alibaba-bom:${springAiAlibabaVersion}"
+		// 添加 Spring AI BOM
+		mavenBom "org.springframework.ai:spring-ai-bom:${springAiVersion}"
+	}
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter'
+	implementation 'org.springframework.ai:spring-ai-starter-mcp-server-webflux'
+	implementation 'org.springframework:spring-web'
+
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}

@@ -1,0 +1,35 @@
+spring:
+  application:
+    name: mcp
+  main:
+    web-application-type: none
+  ai:
+    dashscope:
+      api-key: sk-0ee0d2e3da1f4071a7fd2c48f4043d52
+    mcp:
+      client:
+        stdio:
+          servers-configuration: classpath:/mcp-servers-config.json
+          # ????
+          # connections:
+          #   server1:
+          #     command: java
+          #     args:
+          #       - -jar
+          #       - /Users/xiadong/mcp-stdio-server-exmaple-0.0.1-SNAPSHOT.jar  # ???????????server jar?????
+  mandatory-file-encoding: UTF-8
+
+# ????
+logging:
+  level:
+    io:
+      modelcontextprotocol:
+        client: DEBUG
+        spec: DEBUG
+
+server:
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
