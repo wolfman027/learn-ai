@@ -1,0 +1,21 @@
+server:
+  port: 9001
+  servlet:
+    context-path: /api
+
+spring:
+  application:
+    name: spring-ai-mall-order
+  datasource:
+    url: jdbc:mysql://localhost:33060/mall_product?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  type-aliases-package: com.tlmall.order.entity

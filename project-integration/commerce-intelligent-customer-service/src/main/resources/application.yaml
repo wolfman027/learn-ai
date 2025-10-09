@@ -1,0 +1,9 @@
+server:
+  port: 8888
+
+spring:
+  application:
+    name: commerce-intelligent-customer-service
+  ai:
+    dashscope:
+      api-key: sk-0ee0d2e3da1f4071a7fd2c48f4043d52

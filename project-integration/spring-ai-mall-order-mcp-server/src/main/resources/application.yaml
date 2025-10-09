@@ -1,0 +1,23 @@
+server:
+  port: 9000
+
+spring:
+  main:
+    banner-mode: off
+  application:
+    name: spring-ai-mall-order-mcp-server
+  ai:
+    mcp:
+      server:
+        name: my-order-server
+        version: 0.0.1
+        type: ASYNC  # Recommended for reactive applications
+        # ?? sse ????????? /sse
+        # ???????? ip:port/sse/mcp
+        sse-endpoint: /sse
+        sse-message-endpoint: /mcp
+        capabilities:
+          tool: true
+          resource: true
+          prompt: true
+          completion: true

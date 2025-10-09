@@ -1,0 +1,74 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.4.10'
+	id 'io.spring.dependency-management' version '1.1.7'
+}
+
+group = 'com.wolfman'
+version = '0.0.1-SNAPSHOT'
+description = 'Demo project for Spring Boot'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(17)
+	}
+}
+
+// 定义版本变量
+ext {
+	springBootVersion = '3.4.10-SNAPSHOT'
+//	springAiVersion = '1.0.0-M6'
+//	springAiAlibabaVersion = '1.0.0-M6.1'
+
+	springAiVersion = '1.0.0'
+	springAiAlibabaVersion = '1.0.0.3'
+
+	lombokVersion = '1.18.30'
+	junitVersion = '1.10.1'
+}
+
+
+repositories {
+	mavenCentral()
+	// 添加 Spring AI 快照仓库
+	maven {
+		url 'https://repo.spring.io/snapshot'
+		name 'Spring Snapshots'
+	}
+	maven {
+		url 'https://repo.spring.io/milestone'
+		name 'Spring Milestones'
+	}
+}
+
+// 依赖管理 - 相当于 Maven 的 dependencyManagement
+dependencyManagement {
+	imports {
+		mavenBom "org.springframework.boot:spring-boot-dependencies:${springBootVersion}"
+//		mavenBom "org.springframework.ai:spring-ai-bom:${springAiVersion}"
+
+		mavenBom "org.springframework.ai:spring-ai-bom:${springAiVersion}"
+		mavenBom "com.alibaba.cloud.ai:spring-ai-alibaba-bom:${springAiAlibabaVersion}"
+
+	}
+}
+
+dependencies {
+	implementation "org.springframework.boot:spring-boot-starter-web:${springBootVersion}"
+//	implementation "com.alibaba.cloud.ai:spring-ai-alibaba-starter:${springAiAlibabaVersion}"
+//	implementation "org.springframework.ai:spring-ai-core"
+
+//	implementation 'org.springframework.ai:spring-ai-core'
+//	implementation "org.springframework.ai:spring-ai-spring-boot-autoconfigure"
+	implementation 'com.alibaba.cloud.ai:spring-ai-alibaba-starter-dashscope'
+	implementation "org.springframework.ai:spring-ai-advisors-vector-store:${springAiVersion}"
+
+	implementation "org.projectlombok:lombok:${lombokVersion}"
+	annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+	testImplementation "org.springframework.boot:spring-boot-starter-test:${springBootVersion}"
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}

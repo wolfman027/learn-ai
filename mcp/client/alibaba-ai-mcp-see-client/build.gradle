@@ -32,19 +32,6 @@ repositories {
 	}
 }
 
-repositories {
-	mavenCentral()
-	// 添加 Spring AI 快照仓库
-	maven {
-		url 'https://repo.spring.io/snapshot'
-		name 'Spring Snapshots'
-	}
-	maven {
-		url 'https://repo.spring.io/milestone'
-		name 'Spring Milestones'
-	}
-}
-
 // 依赖管理 - 相当于 Maven 的 dependencyManagement
 dependencyManagement {
 	imports {
